@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="col-md-6 m-auto">
+    <h1>Savings</h1>
+    <p>Annual Savings: {{ savings.0 }}</p>
+    <p>Monthly Savings: {{ savings.1 }}</p>
+    <p>Applied Discount: {{ savings.2 }}</p>
+    <p>Coverage: {{ savings.3 }}</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% load bootstrap4 %} {% block content %}
+<div class="container mt-5">
+  <div class="col-md-6 m-auto">
+    <h1 class="text-center">Calculate Savings</h1>
+    <form method="post">
+      {% csrf_token %} {% bootstrap_form form %}
+      <button class="btn btn-success" type="submit">Calculate</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

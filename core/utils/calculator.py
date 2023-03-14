@@ -7,7 +7,47 @@ def calculator(consumption: list, distributor_tax: float, tax_type: str) -> tupl
     applied_discount = 0
     coverage = 0
 
-    # your code here #
+    # Calculate the average consumption
+    average_consumption = sum(consumption) / len(consumption)
+
+    # Determine the discount based on the average consumption and tax type
+    if average_consumption < 10000:
+        if tax_type == "Residencial":
+            applied_discount = 0.18
+        elif tax_type == "Comercial":
+            applied_discount = 0.16
+        elif tax_type == "Industrial":
+            applied_discount = 0.12
+    elif average_consumption >= 10000 and average_consumption <= 20000:
+        if tax_type == "Residencial":
+            applied_discount = 0.22
+        elif tax_type == "Comercial":
+            applied_discount = 0.18
+        elif tax_type == "Industrial":
+            applied_discount = 0.15
+    elif average_consumption > 20000:
+        if tax_type == "Residencial":
+            applied_discount = 0.25
+        elif tax_type == "Comercial":
+            applied_discount = 0.22
+        elif tax_type == "Industrial":
+            applied_discount = 0.18
+
+    # Calculate the annual savings
+    energy_cost = sum(consumption) * distributor_tax
+    discount_amount = energy_cost * applied_discount
+    annual_savings = energy_cost - discount_amount
+
+    # Calculate the monthly savings
+    monthly_savings = annual_savings / 12
+
+    # Determine the coverage
+    if average_consumption < 10000:
+        coverage = 0.9
+    elif average_consumption >= 10000 and average_consumption <= 20000:
+        coverage = 0.95
+    elif average_consumption > 20000:
+        coverage = 0.99
 
     return (
         round(annual_savings, 2),
@@ -19,6 +59,8 @@ def calculator(consumption: list, distributor_tax: float, tax_type: str) -> tupl
 
 if __name__ == "__main__":
     print("Testing...")
+
+    print(calculator([1000, 1054, 1100], 1.12307169, "Residencial"))
 
     assert calculator([1518, 1071, 968], 0.95871974, "Industrial") == (
         1473.19,
